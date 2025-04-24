@@ -1,0 +1,1 @@
+docker ps --format "table {{.ID}}\t{{.Image}}\t{{.Status}}"

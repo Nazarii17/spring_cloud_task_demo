@@ -1,0 +1,32 @@
+#spring:
+#  application:
+#    name: task_with_spring_batch_h2
+#  datasource:
+#    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+#    driver-class-name: org.h2.Driver
+#    username: sa
+#    password: ''
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#  batch:
+#    job:
+#      enabled: true
+#    jdbc:
+#      initialize-schema: always
+spring:
+  application:
+    name: task_with_spring_batch_h2
+  datasource:
+    url: jdbc:postgresql://postgres:5432/dataflow
+    driver-class-name: org.postgresql.Driver
+    username: root
+    password: rootpw
+  jpa:
+    hibernate:
+      ddl-auto: update
+  batch:
+    job:
+      enabled: true
+    jdbc:
+      initialize-schema: always

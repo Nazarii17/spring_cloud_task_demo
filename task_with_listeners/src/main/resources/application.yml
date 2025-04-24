@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: task_with_listeners
+  datasource:
+    url: jdbc:mysql://localhost:3308/task_server_schema
+    username: batch_user
+    password: batchuser
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update

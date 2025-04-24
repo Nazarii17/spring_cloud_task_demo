@@ -1,0 +1,91 @@
+server:
+  port: 8080
+
+application:
+  config-server-base-url: http://localhost:8888
+  config-server-health-url: ${application.config-server-base-url}/actuator/health
+
+spring:
+  application:
+    name: task-server
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://localhost:3308/task_server_schema
+    username: batch_user
+    password: batchuser
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  batch:
+    jdbc:
+      initialize-schema: always
+  config:
+    import: optional:configserver:${application.config-server-base-url}
+  cloud:
+    config:
+      uri: ${application.config-server-base-url}
+      name: task-server
+      profile: default
+      fail-fast: true
+      retry:
+        max-attempts: 3
+        initial-interval: 1000
+        multiplier: 2
+        max-interval: 5000
+  quartz:
+    job-store-type: jdbc
+    jdbc:
+      initialize-schema: always
+    properties:
+      org:
+        quartz:
+          scheduler:
+            instanceName: TaskScheduler
+            instanceId: AUTO
+          jobStore:
+            isClustered: true
+            clusterCheckinInterval: 10000
+          job-store-type: JDBC
+          jdbc:
+            initialize-schema: NEVER
+          properties:
+            org.quartz.jobStore:
+              tablePrefix: task_server_schema.QRTZ_
+              driverDelegateClass: org.springframework.scheduling.quartz.LocalDataSourceJobStore
+            org.quartz.threadPool:
+              threadNamePrefix: scheduler-worker
+              threadCount: 25
+#  quartz:
+#    job-store-type: jdbc
+#    jdbc:
+#      initialize-schema: never  # Ensure tables are created manually in DB
+#    properties:
+#      org:
+#        quartz:
+#          scheduler:
+#            instanceName: TaskScheduler
+#            instanceId: AUTO  # Ensures each instance has a unique ID
+#          jobStore:
+#            class: org.quartz.impl.jdbcjobstore.
+#            driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+#            tablePrefix: task_server_schema.QRTZ_
+#            isClustered: true
+#            clusterCheckinInterval: 10000  # 10 sec heartbeat
+#          threadPool:
+#            threadNamePrefix: scheduler-worker
+#            threadCount: 25
+
+management:
+  health:
+    db:
+      enabled: true  # Ensure built-in health checks like DB are enabled
+    diskspace:
+      enabled: true  # Enable diskspace health check
+
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, info, metrics
+
+tasks:
+  location: classpath:tasks/

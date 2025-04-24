@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: local_task_deployer
+
+server:
+  port: 8084

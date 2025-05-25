@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: user_provider
+  datasource:
+    url: jdbc:mysql://localhost:3309/user_provider_db
+    username: batch_user
+    password: batchuser
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+server:
+  servlet:
+    context-path: /api

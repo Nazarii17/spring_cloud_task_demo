@@ -1,0 +1,28 @@
+services:
+  # 1️⃣ User Provider Database
+  user_provider_db:
+    image: mysql:8.0
+    container_name: user_provider_db
+    environment:
+      MYSQL_DATABASE: user_provider_db
+      MYSQL_USER: batch_user
+      MYSQL_PASSWORD: batchuser
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3309:3306"
+    volumes:
+      - /Users/nazarii.tkachuk/Development/App_volumes/user_provider_db:/var/lib/mysql
+
+  # 2️⃣ Batch Demo Database
+  sombra_batch_demo:
+    image: mysql:8.0
+    container_name: sombra_batch_demo
+    environment:
+      MYSQL_DATABASE: sombra_batch_demo
+      MYSQL_USER: batch_user
+      MYSQL_PASSWORD: batchuser
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3310:3306"
+    volumes:
+      - /Users/nazarii.tkachuk/Development/App_volumes/sombra_batch_demo:/var/lib/mysql

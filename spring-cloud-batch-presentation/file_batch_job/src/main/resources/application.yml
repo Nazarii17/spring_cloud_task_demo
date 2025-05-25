@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: file_batch_job
+
+  datasource:
+    url: jdbc:mysql://localhost:3310/sombra_batch_demo
+    username: batch_user
+    password: batchuser
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  batch:
+    job:
+      enabled: true
+    jdbc:
+      initialize-schema: always
+
+
+file:
+  input: classpath:/input.csv
+
+batch-job:
+  error-csv:
+    header: "first_name,last_name,email,registration_state"

@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: hello_spring_batch
+
+  datasource:
+    url: jdbc:mysql://localhost:3310/sombra_batch_demo
+    username: batch_user
+    password: batchuser
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  batch:
+    job:
+      enabled: true
+    jdbc:
+      initialize-schema: always
+
+app:
+  names:
+    - John
+    - Mary
+    - Bob
+    - Jane

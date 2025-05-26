@@ -20,4 +20,5 @@ file:
 
 batch-job:
   error-csv:
-    header: "first_name,last_name,email,registration_state"
+    header: "Your,CSV,Header,Here"
+    path: "spring-cloud-batch-presentation/file_batch_job/src/main/resources/error_output.csv"

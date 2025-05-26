@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: api_batch_job
+  main:
+    web-application-type: servlet
+
+  datasource:
+    url: jdbc:mysql://localhost:3310/sombra_batch_demo
+    username: batch_user
+    password: batchuser
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  batch:
+    job:
+      enabled: false
+    jdbc:
+      initialize-schema: always
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+api:
+  user:
+    base-url: http://127.0.0.1:8080
+    get-users-path: ${api.user.base-url}/api/user/v2
+    complete-path: ${api.user.base-url}/api/user/complete
+
+server:
+  port: 8081

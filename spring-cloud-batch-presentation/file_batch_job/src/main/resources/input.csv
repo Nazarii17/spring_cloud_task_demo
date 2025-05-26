@@ -1,0 +1,18 @@
+# src/main/resources/input.csv
+first_name,last_name,email,registration_state
+John,Doe,john.doe.1@example.com,IN_PROGRESS
+Jane,Smith,jane.smith.2@example.com,COMPLETED
+Peter,Jones,peter.jones.3@example.com,IN_PROGRESS
+Alice,Williams,alice.williams.4@example.com,COMPLETED
+Bob,Brown,bob.brown.5@example.com,IN_PROGRESS
+Charlie,Davis,charlie.davis.6@example.com,COMPLETED
+Diana,Evans,diana.evans.7@example.com,IN_PROGRESS
+Frank,Green,frank.green.8@example.com,COMPLETED
+Grace,Hall,grace.hall.9@example.com,IN_PROGRESS
+Henry,Ivy,henry.ivy.10@example.com,COMPLETED
+Ivy,Jackson,ivy.jackson11@example.com,IN_PROGRESS
+Karen,King,karen.king12@example.com,IN_PROGRESS
+Liam,Lewis,liam.lewis.13@example.com,COMPLETED
+Mia,Miller,mia.miller.14@example.com,IN_PROGRESS
+Noah,Nelson,noah.nelson.15@example.com,IN_PROGRESS
+Olivia,Owens,olivia.owens.16@example.com,IN_PROGRESS

@@ -10,18 +10,18 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Builder
-public record UserRecord(UUID id,
-                         String name,
-                         ReadStatus readStatus,
-                         int iteration,
-                         @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+public record UserRecordV1(UUID id,
+                           String name,
+                           ReadStatus readStatus,
+                           int iteration,
+                           @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
                          LocalDateTime createdAt,
-                         @JsonInclude(JsonInclude.Include.NON_NULL)
+                           @JsonInclude(JsonInclude.Include.NON_NULL)
                          @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
                          LocalDateTime updatedAt) implements UserData {
 
-    public static UserRecord convert(final UserData user) {
-        return UserRecord.builder()
+    public static UserRecordV1 convert(final UserData user) {
+        return UserRecordV1.builder()
                 .id(user.getId())
                 .name(user.getName())
                 .readStatus(user.getReadStatus())

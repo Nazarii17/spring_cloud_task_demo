@@ -3,6 +3,7 @@ package com.ntj.file_batch_job.listener;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobExecutionException;
+import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.batch.core.annotation.AfterJob;
 import org.springframework.batch.core.annotation.BeforeJob;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,7 +29,8 @@ public class FileCheckListener {
 
     @BeforeJob()
     public void beforeJob(JobExecution jobExecution) throws JobExecutionException {
-        log.info("< - - - - Job '{}' starting. Initiating pre-job file check. - - - - >", jobExecution.getJobInstance().getJobName());
+        log.info("< - - - - Job '{}' starting. Initiating pre-job file check. - - - - >",
+                jobExecution.getJobInstance().getJobName());
         log.debug("Configured input file path: {}", inputFilePath);
 
         try {

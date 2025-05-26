@@ -2,6 +2,10 @@ package com.ntj.file_batch_job.config.restart;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.batch.core.Job;
+import org.springframework.batch.core.JobParameters;
+import org.springframework.batch.core.JobParametersBuilder;
+import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -11,7 +15,8 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class StartupRunner implements CommandLineRunner {
 
-    private final JobRunner jobRunner;
+    private final JobLauncher jobLauncher;
+    private final Job importUserJob;
 
     @Value("${spring.batch.job.enabled}")
     private boolean springBatchJobEnabled;
@@ -20,8 +25,16 @@ public class StartupRunner implements CommandLineRunner {
     public void run(String... args) throws Exception {
         if(!springBatchJobEnabled){
             log.info("< - - - Start Retryable Batch Job - - - >");
-            jobRunner.runJobWithId(3);
+            runJobWithId(1);
         }
+    }
+
+    public void runJobWithId(final Integer runId) throws Exception {
+        final JobParameters jobParameters = new JobParametersBuilder()
+                .addJobParameter("custom.id", runId, Integer.class)
+                .toJobParameters();
+
+        jobLauncher.run(importUserJob, jobParameters);
     }
 }
 

@@ -1,6 +1,7 @@
 package com.ntj.user_provider.controller;
 
-import com.ntj.springcloudbatchcommon.dto.UserRecord;
+import com.ntj.springcloudbatchcommon.dto.UserRecordV1;
+import com.ntj.springcloudbatchcommon.dto.UserRecordV2;
 import com.ntj.user_provider.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +18,14 @@ public class UserController {
 
     private final UserService userService;
 
-    @GetMapping
-    public List<UserRecord> getAllAvailableUsers() {
-        return userService.getAllAvailableUsers();
+    @GetMapping("/v1")
+    public List<UserRecordV1> getAllAvailableUsersV1() {
+        return userService.getAllAvailableUsersV1();
+    }
+
+    @GetMapping("/v2")
+    public List<UserRecordV2> getAllAvailableUsers() {
+        return userService.getAllAvailableUsersV2();
     }
 
     @GetMapping("/complete")

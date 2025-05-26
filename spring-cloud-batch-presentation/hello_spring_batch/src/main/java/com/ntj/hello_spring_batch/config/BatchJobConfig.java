@@ -1,6 +1,7 @@
 package com.ntj.hello_spring_batch.config;
 
 import com.ntj.hello_spring_batch.domain.User;
+import com.ntj.hello_spring_batch.listener.WriterListener;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
@@ -45,8 +46,8 @@ public class BatchJobConfig {
         return new JobBuilder("first_job", jobRepository)
                 .incrementer(new RunIdIncrementer())
                 .start(firstStep)
-                .next(secondStep)
-                .next(thirdStep)
+//                .next(secondStep)
+//                .next(thirdStep)
                 .build();
     }
 
@@ -120,7 +121,8 @@ public class BatchJobConfig {
                           final PlatformTransactionManager platformTransactionManager,
                           final @Qualifier("namesReader") ItemReader<String> namesReader,
                           final @Qualifier("namesProcessor") ItemProcessor<String, User> namesProcessor,
-                          final @Qualifier("namesWriter") ItemWriter<User> namesWriter) {
+                          final @Qualifier("namesWriter") ItemWriter<User> namesWriter,
+                          final WriterListener writerListener) {
         return new StepBuilder("third_step", jobRepository)
                 .<String, User>chunk(3, platformTransactionManager)
 
@@ -129,6 +131,8 @@ public class BatchJobConfig {
                 .processor(namesProcessor)
 
                 .writer(namesWriter)
+
+//                .listener(writerListener)
 
                 .allowStartIfComplete(true)
                 .build();

@@ -27,21 +27,21 @@ public class BatchConfiguration {
 
     private final JobRepository jobRepository;
     private final PlatformTransactionManager transactionManager;
-    private final FileCheckListener fileCheckListener;
-    private final CustomFirstInOrderExecutionListener1 customFirstInOrderExecutionListener1;
-    private final CustomFirstInOrderExecutionListener2 customFirstInOrderExecutionListener2;
 
     @Bean
-    public Job importUserJob(FlatFileItemReader<Person> csvFileItemReader,
-                             ErrorReaderListener errorReaderListener,
-                             PersonItemProcessor personItemProcessor) {
+    public Job importUserJob(final FlatFileItemReader<Person> csvFileItemReader,
+                             final ErrorReaderListener errorReaderListener,
+                             final PersonItemProcessor personItemProcessor,
+                             final CustomFirstInOrderExecutionListener1 customFirstInOrderExecutionListener1,
+                             final CustomFirstInOrderExecutionListener2 customFirstInOrderExecutionListener2,
+                             final FileCheckListener fileCheckListener) {
         return new JobBuilder("importUserJob", jobRepository)
                 .incrementer(new RunIdIncrementer())
                 .flow(readUsersFromFile(csvFileItemReader, errorReaderListener, personItemProcessor))
                 .end()
-                .listener(customFirstInOrderExecutionListener2)
-                .listener(customFirstInOrderExecutionListener1)
-                .listener(fileCheckListener)
+//                .listener(customFirstInOrderExecutionListener1)
+//                .listener(customFirstInOrderExecutionListener2)
+//                .listener(fileCheckListener)
                 .build();
     }
 
@@ -50,12 +50,12 @@ public class BatchConfiguration {
                                   ErrorReaderListener errorReaderListener,
                                   PersonItemProcessor personItemProcessor) {
         return new StepBuilder("readUsersFromFile", jobRepository)
-                .<Person, Person>chunk(1, transactionManager)
+                .<Person, Person>chunk(3, transactionManager)
                 .reader(csvFileItemReader)
                 .processor(personItemProcessor)
                 .writer(consoleItemWriter())
-                .listener((ItemReadListener<? super Person>) errorReaderListener)
-                .listener((StepExecutionListener) errorReaderListener)
+//                .listener((ItemReadListener<? super Person>) errorReaderListener)
+//                .listener((StepExecutionListener) errorReaderListener)
                 .build();
     }
 

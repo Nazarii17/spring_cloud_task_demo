@@ -1,0 +1,11 @@
+GET http://127.0.0.1:8080/api/user/v1
+
+###
+
+GET http://127.0.0.1:8080/api/user/v2
+
+###
+
+GET http://127.0.0.1:8080/api/user/complete
+
+###

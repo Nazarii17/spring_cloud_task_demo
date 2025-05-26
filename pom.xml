@@ -38,7 +38,6 @@
     <module>spring-cloud-task-presentation/task_with_retry</module>
     <module>spring-cloud-task-presentation/task_with_spring_batch</module>
     <module>spring-cloud-task-presentation/task_with_docker</module>
-
     <module>spring-cloud-task-presentation/task_with_spring_batch_h2</module>
     <module>spring-cloud-task-presentation/task-server</module>
     <module>spring-cloud-task-presentation/local_task_launcher</module>
@@ -47,6 +46,7 @@
     <module>spring-cloud-batch-presentation/user_provider</module>
     <module>spring-cloud-batch-presentation/hello_spring_batch</module>
     <module>spring-cloud-batch-presentation/file_batch_job</module>
+    <module>spring-cloud-batch-presentation/api_batch_job</module>
   </modules>
 
   <build>
